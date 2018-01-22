@@ -10,8 +10,8 @@ def index(request):
     return render(request, 'textbook/index.html', {"textbooks" : textbooks })
 
 def content(request, title):
-    book = Question.objects.get()
-    return render(request, 'textbook/book.html')
+    book = Textbook.objects.get(title=title)
+    return render(request, 'textbook/book.html', {"book" : book})
 
 
 

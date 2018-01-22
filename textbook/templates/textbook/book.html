@@ -3,7 +3,17 @@
 {% extends "textbook/base.html" %}
 
 {% block 'body' %}
+<h3>Table of Contents</h3>
+<h1>
 
-
-
+  {{ book.title }}
+  <ul style="list-style-type:circle">
+  {% for chapter in book.chapter_set.all %}
+  <h3>
+    <li>
+      {{ chapter.title }}
+    </li>
+  </h3>
+  {% endfor %}
+  </ul>
 {% endblock %}
