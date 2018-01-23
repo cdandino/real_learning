@@ -3,17 +3,50 @@
 {% extends "textbook/base.html" %}
 
 {% block 'body' %}
-<h3>Table of Contents</h3>
-<h1>
 
-  {{ book.title }}
-  <ul style="list-style-type:circle">
+<img src="{{ book.cover_image.url }}" alt="Cover Image"/>
+<h1>{{ book.title }} </h1>
+<h3>Table of Contents</h3>
+
+<ol>
   {% for chapter in book.chapter_set.all %}
-  <h3>
     <li>
       {{ chapter.title }}
+      {% for section in chapter.section_set.all %}
+      <ul>
+	<li>
+	  {{ chapter.number }}.{{ section.number }} {{ section.title }}
+	</li>
+      </ul>
+      {% endfor %}
     </li>
-  </h3>
   {% endfor %}
-  </ul>
+</ol>
+
+
+{% for chapter in book.chapter_set.all %}
+<h1>Chapter {{ chapter.number }}</h1>
+<h2>{{ chapter.title }} </h2>
+<div>
+  <h4>{{ chapter.subtitle }}</h4>
+</div>
+
+<p>
+  {{ chapter.intro }}
+</p>
+{% for section in chapter.section_set.all %}
+
+<div>
+  <h5>{{ chapter.number }}.{{ section.number }} {{ section.title }}</h5>
+</div>
+<p>{{ section.text }} </p>
+
+{% endfor %}}
+
+
+
+{% endfor %}
+
+
+
 {% endblock %}

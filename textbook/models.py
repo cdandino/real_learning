@@ -24,7 +24,13 @@ class Chapter(models.Model):
     
 
 class Section(models.Model):
-    chapter = models.ForeignKey(Textbook, on_delete=models.CASCADE)
-    number = models.FloatField()
+    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
+    number = models.IntegerField()
     title = models.CharField(max_length=50)
     text = models.TextField(blank=True, default="")
+
+    def __str__(self):
+        rep = "%s  %d.%d %s" %  (self.chapter.textbook,self.chapter.number,self.number,self.title)
+        return rep
+    
+   
